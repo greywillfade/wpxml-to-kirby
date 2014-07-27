@@ -19,6 +19,7 @@ $ns = array (
  
 //Get the contents of the import file
 $importfile = '[IMPORTFILE.XML]';
+$exportdir = '[EXPORT DIRECTORY IN RELATION TO THIS FILE/]'; //Include training slash please
 $xml = file_get_contents($importfile);
 $xml = new SimpleXmlElement($xml);
 
@@ -77,7 +78,7 @@ foreach ($xml->channel->item as $item)
     //Save to file
     $tmptitle = str_replace(' ', '', $article['title']);
     $tmpdate = str_replace('/', '-', $article['pubDate']); //You don't want slashes, or it'll look for directories
-    $file = '[EXPORTDIRECTORY.XML]' . $tmpdate . '-' . $tmptitle . '.txt';
+    $file = $exportdir . $tmpdate . '-' . $tmptitle . '.txt';
     file_put_contents($file, $strtowrite);
     echo 'File written: ' . $file . ' at ' . date('Y-m-d H:i:s') . '<br />';
 }
